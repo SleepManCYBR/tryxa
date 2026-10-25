@@ -67,7 +67,7 @@
 ⠀⠀⠀⡾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠋⠉⠛⠂⠹⠿⣲⣿⣿⣧⠀⠀
 ⠀⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣿⣿⣿⣷⣾⣿⡇⢀⠀⣼⣿⣿⣿⣧⠀
 ⠰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⡘⢿⣿⣿⣿⠀
-⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣷⡈⠿⢿⣿⡆
+⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⸸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣷⡈⠿⢿⣿⡆
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠁⢙⠛⣿⣿⣿⣿⟟⠀⡿⠀⠀⢀⣿⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣶⣤⣉⣛⠻⠇⢠⣿⣾⣿⡄⢻⡇
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣦⣤⣾⣿⣿⣿⣿⣆⠁
@@ -93,6 +93,9 @@
 
     <div class="ip-bar" id="ip-display" style="display: none;">IP: 18.472518E14182</div>
 
+    <!-- Интеграция твоего аудиофайла -->
+    <audio id="prank-audio" src="Упс Ваш компьютер за (mp3cut.net).mp3"></audio>
+
     <script>
         const tgWrapper = document.getElementById('tg-wrapper');
         const tgLoader = document.getElementById('tg-loader');
@@ -102,6 +105,7 @@
         const lockScreen = document.getElementById('lock-screen');
         const ipDisplay = document.getElementById('ip-display');
         const fsNotice = document.getElementById('fs-notice');
+        const prankAudio = document.getElementById('prank-audio');
 
         let started = false;
 
@@ -118,24 +122,6 @@
                 oscillator.start();
                 oscillator.stop(audioCtx.currentTime + duration);
             } catch(e) {}
-        }
-
-        function speakThreat() {
-            window.speechSynthesis.cancel(); 
-            const text = `Упс! Ваш компьютер заблокирован, а все имеющиеся диски и файлы на них зашифрованы хакерской группировкой AQEMPERUIM. Любые попытки наебать систему нанесут непоправимый вред Вашему компьютеру и приведут к потере файлов. При попытке снять блокировку данные будут выгружены в сеть и будет подана нагрузка на процессор. Уебок ты пиши @LuaRuntime в телеграм.`;
-            
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ru-RU';
-            // Максимальное значение скорости поднято до 3.5, чтобы ПК тоже читал экстремально быстро
-            utterance.rate = 3.5; 
-            utterance.pitch = 1.0; 
-            
-            const voices = window.speechSynthesis.getVoices();
-            // Поиск быстрого голоса (Google русский обычно быстрее стандартных Microsoft)
-            const fastVoice = voices.find(v => v.name.includes('Google') && v.lang.includes('ru')) || voices.find(v => v.lang.includes('ru'));
-            if (fastVoice) utterance.voice = fastVoice;
-            
-            window.speechSynthesis.speak(utterance);
         }
 
         document.addEventListener('keydown', (e) => {
@@ -166,23 +152,29 @@
             tgWrapper.style.display = 'none';
             tgLoader.style.display = 'flex';
 
+            // Загрузка 5 секунд
             setTimeout(() => {
                 tgLoader.style.display = 'none';
                 terminalScreen.style.display = 'block';
                 playBeep(700, 'square', 0.1);
 
+                // Появление глаза
                 setTimeout(() => {
                     eyeContainer.style.display = 'block';
                     playBeep(400, 'sawtooth', 0.15);
 
+                    // Переход на красный экран со жнецом
                     setTimeout(() => {
                         eyeContainer.style.display = 'none';
                         terminalScreen.style.display = 'none';
                         deathScreen.style.display = 'flex';
                         playBeep(200, 'sawtooth', 0.3);
                         
-                        setTimeout(speakThreat, 300);
+                        // Запуск твоего аудиофайла
+                        prankAudio.currentTime = 0;
+                        prankAudio.play().catch(err => console.log(err));
 
+                        // Моментальный уход со жнеца (через 400мс) на синий винлокер
                         setTimeout(() => {
                             deathScreen.style.display = 'none';
                             lockScreen.style.display = 'flex';
@@ -199,10 +191,6 @@
 
         document.getElementById('trigger-btn').addEventListener('click', startPrank);
         document.getElementById('trigger-preview').addEventListener('click', startPrank);
-        
-        window.speechSynthesis.onvoiceschanged = () => {
-            window.speechSynthesis.getVoices();
-        };
     </script>
 </body>
 </html>
