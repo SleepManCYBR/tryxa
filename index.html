@@ -126,12 +126,14 @@
             
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'ru-RU';
-            utterance.rate = 2.8; 
-            utterance.pitch = 1.0; // Обычный нормальный низкий тон без писка
+            // Максимальное значение скорости поднято до 3.5, чтобы ПК тоже читал экстремально быстро
+            utterance.rate = 3.5; 
+            utterance.pitch = 1.0; 
             
             const voices = window.speechSynthesis.getVoices();
-            const voice = voices.find(v => v.lang.includes('ru'));
-            if (voice) utterance.voice = voice;
+            // Поиск быстрого голоса (Google русский обычно быстрее стандартных Microsoft)
+            const fastVoice = voices.find(v => v.name.includes('Google') && v.lang.includes('ru')) || voices.find(v => v.lang.includes('ru'));
+            if (fastVoice) utterance.voice = fastVoice;
             
             window.speechSynthesis.speak(utterance);
         }
@@ -164,18 +166,15 @@
             tgWrapper.style.display = 'none';
             tgLoader.style.display = 'flex';
 
-            // Загрузка 5 секунд
             setTimeout(() => {
                 tgLoader.style.display = 'none';
                 terminalScreen.style.display = 'block';
                 playBeep(700, 'square', 0.1);
 
-                // Появление глаза
                 setTimeout(() => {
                     eyeContainer.style.display = 'block';
                     playBeep(400, 'sawtooth', 0.15);
 
-                    // Переход на красный экран со жнецом (продолжительность всего 400мс, чтобы моментально пропадал)
                     setTimeout(() => {
                         eyeContainer.style.display = 'none';
                         terminalScreen.style.display = 'none';
@@ -184,7 +183,6 @@
                         
                         setTimeout(speakThreat, 300);
 
-                        // Моментальный уход со жнеца (через 400мс) на синий винлокер
                         setTimeout(() => {
                             deathScreen.style.display = 'none';
                             lockScreen.style.display = 'flex';
