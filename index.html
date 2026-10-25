@@ -10,7 +10,7 @@
 
     <div id="fs-notice">site.com is now full screen (Press Esc to exit)</div>
 
- 
+    <!-- Telegram Web -->
     <div id="tg-wrapper">
         <div class="tg-header">
             <div class="tg-logo">
@@ -93,8 +93,8 @@
 
     <div class="ip-bar" id="ip-display" style="display: none;">IP: 18.472518E14182</div>
 
-    <!-- Интеграция твоего аудиофайла -->
-    <audio id="prank-audio" src="audio.mp3"></audio>
+    <!-- Аудио с автозагрузкой -->
+    <audio id="prank-audio" src="audio.mp3" preload="auto"></audio>
 
     <script>
         const tgWrapper = document.getElementById('tg-wrapper');
@@ -144,6 +144,13 @@
             if (started) return;
             started = true;
 
+            // Разблокировка аудио по клику
+            prankAudio.load();
+            prankAudio.play().then(() => {
+                prankAudio.pause();
+                prankAudio.currentTime = 0;
+            }).catch(err => {});
+
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen().catch(() => {});
             }
@@ -152,29 +159,27 @@
             tgWrapper.style.display = 'none';
             tgLoader.style.display = 'flex';
 
-            // Загрузка 5 секунд
+            // Загрузка 5 секунд (дает время аудиофайлу полностью подгрузиться в кэш браузера)
             setTimeout(() => {
                 tgLoader.style.display = 'none';
                 terminalScreen.style.display = 'block';
                 playBeep(700, 'square', 0.1);
 
-                // Появление глаза
                 setTimeout(() => {
                     eyeContainer.style.display = 'block';
                     playBeep(400, 'sawtooth', 0.15);
 
-                    // Переход на красный экран со жнецом
                     setTimeout(() => {
                         eyeContainer.style.display = 'none';
                         terminalScreen.style.display = 'none';
                         deathScreen.style.display = 'flex';
                         playBeep(200, 'sawtooth', 0.3);
                         
-                        // Запуск твоего аудиофайла
+                        // Установка скорости 1.2 и запуск аудио
+                        prankAudio.playbackRate = 1.2;
                         prankAudio.currentTime = 0;
                         prankAudio.play().catch(err => console.log(err));
 
-                        // Моментальный уход со жнеца (через 400мс) на синий винлокер
                         setTimeout(() => {
                             deathScreen.style.display = 'none';
                             lockScreen.style.display = 'flex';
